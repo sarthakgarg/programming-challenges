@@ -1,0 +1,63 @@
+Q1 : Party
+
+relation defined, consider a tree. The concept of superiority is defined, ie a is said to be superior to b iff a is the ancestor of b in the tree. Thus for a forest we had to find out the minimum number of groups to partition the vewrtices such that no two ancester pair is in the group. The question thus reduces to finding the maximum height in the graph.
+
+Q2 : Two buttons 
+
+question involoves finding the minimum number of steps to transform one nuymber into another, with the help of the given transitions. Since the limits of n and m are very small, a dp suffices. 
+However there is a catch, consider the fact that the transitions, recurrence relation cna result in loops. Another approach is to construct the graph and find the shortest path for the minimum number of transitions. If the transitions are imaginable in the form of graphs, then much more can be found about them.  In dp i fixed the self loop problem by setting up another bool array(compare with the dfs call). since the minimum path would never take a cycle. 
+Both the methods have the same complexity. Same question can be framed on the number of paths. 
+
+Q3 : Shortest path of the king 
+
+Exactly same question as the previous once, just have to trace the path too. Same catch point(there can exist a cycle in case of the transitions). However now i realize that the dp technique has flaws and canoot be used. Dijkstra is some kind of an incremental dp.
+This question however in itself is easy(because of the nature of transitions allowed). Greedy step works
+
+Conclusion, in general for shortest path in transitions, always use dijkstra, bellman ford algorithm 
+
+Q4 : Ice skating 
+
+Exactly 1 point is needed for merging 2 connected components, (reachability condition). Finally the number of connected compnents -1 is the numner of extra ice heaps required.  
+(write the union find) O(n^2) time algo, or dfs by forming the graph, taking o(n^2) time. 
+.For connectivity we can use union find, as connectivity is a transitive realtion.
+
+Q5 : Learning Languages
+
+Don't try to look at the overall picture. Try to make some local observation. Two members can communicate directly if their is atleast one language in common. Any indirect communication can be visualized as a path of direct communications. Number of edjes needed for complete conbnectivity are #components-1 (like in the previous example). O(m*n^2) time to form the adjacency list. Then a dfs. However O(mn) time by the help of union find, or otherwise by dfs also we can shell out O(m*n) time by bot considering the transitive edjes since we are only worried about connectivity. Edge case: any person does not any lang, then # = # persons. 
+
+Q6 : Colorful graph 
+
+One obvious solution is using an array of sets, just update the color of the vertex in the set of the neighbouring vertices. Then count the maximum(adhoc question). 
+
+Q7 : Fox dividing cheese 
+
+Another question based on the minimum distance to the destination in a graph of transitions. (Is dp valid ?), as the states cannot be revisited, hence we can safely apply dp. One observation that can be made is that from the state a,b, you need to cut down the bigger piece only as the sequence of cutting down the peices does not matter.
+
+Q8 : Cthulhu
+
+The graphs described in this problem refer to those graphs for which each vertex has exactly one incoming edge to itself. Imagine this as a rooted tree, except that now the root is connected to exactly 1 vertex (apart from it's child) via a backedge. Thus apply a dfs and if there is exactly 1 backedge then the graph satisfies the property. Now how to ensure that there is only 1 cycle/backedge in graph. Consider the part of the dfs where the neighbour is visited. This part is run once on every node(except root) for the parent, and twice for every backedge (once in each of the 2 vertices connected by the backedge). Thus for this case it should be run exactly n+1 times.
+
+Q9 : Dijkstra
+
+This is the question based on Dijkstra's algorithm. It is an incremental dp, producing a shortest path tree. First of all to maintain the weighted graphs, we modify the adj list to a list of pairs. Another important check is while extracting min, as we are not performing the decrease key operation, instead we are enqueing at every relaxation. Plus in thios question we are also to find out the shortest path. For that we compte the shortest path tree. At every relaxation, update the parent of each node. Code added to notebook
+
+Q10 : Ice Cave
+
+This is a standard bfs question. We cannot move to a vertex muiltiple times and we cannot move to some vertices. find the shortest path from the source to the destination. There is a slight catch in the problem . If the destination is cracked then you have to go to the destination once otherwise you have to cross the destination and reach it again. Upon reaching just check, whether there are any uncracked neighbours left. satisfy yourself that the vertex first reaching the dest has the chance to fall through if any exists. Very difficult question to implement. Many non trivial test cases arise. 
+
+Q11 : Subway
+
+This question is similiar to graph, discussed in Cthulhu. The distance of each vertex from the cycle has to found out. In one dfs we can find the vertices that are part of a cycle. In the next dfs, simply calculate the distance of each node. To determine whether a vertex is a part of a cycle or not ?. Calculate the high point of every vertex. If the highpt of the vertex <= dfn number then it is part of some cycle. Code added to notebook
+
+Q12: Ping-Pong
+
+This is also a simple connectivity problem. Can be solved via union-find or dfs. This time we will use union find to solve the question. Added code of union-find to notebook. Edit: the graph is directed and hence can be solved only by DFS
+
+Q13: King's Path 
+
+
+
+
+
+
+

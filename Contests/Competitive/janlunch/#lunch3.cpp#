@@ -1,0 +1,35 @@
+#include<stdio.h>
+#include"iostream"
+using namespace std;
+typedef long long ll;
+ll modexp(ll a,ll b,ll p)
+{
+  ll x;
+  if(b==0)
+    return 1;
+  x=modexp(a,b/2,p);
+  x=(x*x)%p;
+  if(b%2==1)
+    x=(x*a)%p;
+  return x;
+}
+int main()
+{
+  ll i,t,m,a,b,prod;
+  char ch;
+  scanf("%lld",&t);
+  while(t--)
+    {
+      scanf("%lld",&m);
+      prod=1;
+      scanf("%c",&ch);
+      while(ch!='\n')
+	{
+	  scanf("%lld**%lld",&a,&b);
+	  prod=(prod*modexp(a,b,m))%m;
+	  scanf("%c",&ch);
+	}
+      printf("%lld\n",prod);
+    }
+  return 0;
+}

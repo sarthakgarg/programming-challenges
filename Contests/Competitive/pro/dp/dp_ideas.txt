@@ -1,0 +1,105 @@
+Q1 : Minimization
+
+Difficulty: Medium hard 
+The question invovled a mixture of dp and greedy strategies. If an array is permuted in increasing order, then summation(|a[i+1]-a[i]|) = max element - min element which is minimum. Now this problem involves k such series. We have to choose max and min for each series. To optimize, we choose the k series in the form of contiguous subsegments of the sorted array. However some of these sequences are of length (n-1)/k are the rest are of length (n-k)/k. choosing the order in which they come can be done by a k*k dp. Thus time complexity is O(nlogn + k^2)
+
+Q2 : Lucky subsequence 
+
+Difficulty: Easy-Medium 
+The question is based on counting the number of subsequences. Restrictions are that they are of length k and do not contain repeated lucky numbers. The problem is simple and boils down to finding the ways of choosing r objects from m buckets(each bucket containing some number of items), such that atmost one is choosen fropm each bucket. The number of buckets are at the max 2^9 + 2^8 + 2^7 ... . .  and thus the complexity of dp is 2^20 + O(nlogn).
+
+Q3 : Sequence 
+
+Difficulty: Medium-Hard
+The question asks to equalize the height of the bars, by increasing or decreasing the heights(Each increase/decrease incurring a cost of 1 unit). The main observation in the question is that in the optimal solution, the height of all bars belong to the set of the intial heights only. This can be inferred by making a local observation. Think about any 2 neighbours in the optimal solution. An optimal solution of such kind always exists. This reduces the problem to an n^3 dp. However this can further be reduced to an O(n^2) dp. note that dp[n][k] = abs(heightOfK - intialHeight) + min(dp[n-1][j]), where j varies from 0....k. Thus instead of maintaing dp[n][k], maintain dp'[n][k] = min(dp[n][j]), j from 0 to k. Now m = min(m, abs(heightK - initialHeightOfn) + dp'[n-1][k]), dp'[n][k] = m.  
+
+Q4 : Let's go rolling
+
+Difficulty: Easy
+The question can be solved by a dp technique that is mosty commonly used. store the optimum solutions in which the last ball is pinned.(similiar to the LIS problem). 
+
+Q5 : Police station
+
+Difficulty: Medium 
+
+This problem can be solved using 2 bredth first search traversal. we have to count in how many shortest paths does each edge come. Let u,v be an edge . We will calculate the ways to reach from 1 to u and v via shortest paths and ways to reach from n to u and v via shortest paths. We wolud also keep the shortest path distances. If an edge does come in the shortest path from 1 to n then simply multiply the ways of it's end points. Finaaly scan among all vertices to find the max. Then calculate the average. Time complexity O(m).This question could also be extended to weighted graphs where one would have to use dijkstra instead of bfs. 
+
+Q6 : Kalila 
+
+Difficulty: Medium (involves a concept)
+The O(n^2) is easy to think . dp[i] = min(dp[j]+a[j]*h[i]) for j<i;, dp[1]=0, find dp[n]. However it can be reduced to O(nlogn) using convex hull trick. The slopes of the lines a[j] in decreasing order, and thus the intervals of minimality can be calculated in a stack manner. Then the query for the minimum can be made using a simple binary search. If we want to add l1 and the last 2 elements are l2 and l3, pop l3 if the intersection point of l1 and l2 is less than the intersection point of l1 and l3. Finally push l1 along with it's intersection point from the previous element of the stack.  
+
+Q7 : Coloring Brackets 
+
+Difficulty : Hard
+
+Logic wise, the question is easy as you just have to break the brackets by the defination of balanced. ie , given a range, either split the bracket into 2 brackets , or just remove the outer layer of the matching brackets. Implementation wise, it can have some number of cases. 4-5. Time complexity is not a problem. 
+Edit : Implementation is hard.
+
+Q8 :  Checkkout assistant 
+
+Difficulty : Easy 
+
+It is a 0-1 kanpsack problem. O(nt) time complexity. The problem is simplified because, the person has to buy all the items and each time takes only 1 second to be stolen. The choice thus is to steal an item or not. Consequently if you steal, the time for stealing is increased by t[i], else the time for stealing is decreased by 1.
+dp[n][t] = min(c[n]+dp[n-1][t+t[i]],dp[n-1][t-1]); boundary condition. if(n<0) return (t>=0)?0:INF;
+
+Q9 : Fish
+
+Difficulty : Medium 
+
+Since there are only 18 fish, we can represent each set of the fish by a dp number. while processing each state of the fish, we first find out how may bits are set and calculte the probability of each pair meeting. Then for each set bit 
+we calculate the probability of the set which is made by excluding that fish. The order in which the states are processed is the same as that of a queue. 
+
+Q10: Algorace
+
+Difficulty : Medium-Hard 
+
+The dp is ans(k,i,j) = min(ans(k-1,i,j),ans(k-1,i,m) + fastest(m,j)). where fastest(m,j) = min(shortest(m,j,car i)). Note that k can be atmost n. After that the answers are constant. Thus space complexity = k*n*n, and time complexity = k*n*n*n. The matrix fastest can be computed in O(n*n*n*m). Thus total time complexity = O(mn^3 + n^4). 
+Floyd warshall uses the dp parameter as the range of the intermediate vertices used. Another solution is dp upon the number of the vertices in the path. Note that the fastest way to go from k to j may not lead to a change of car, but still it would give the correct answer, as the optimal solution will fit into this. (Inductive proof)
+
+Q11 : Wizards and the prizes 
+
+Difficulty : Medium
+
+This problem is similiar to the problem checkout assistnt, it is just a modification of the classic kanpsaqck problem. Either we win the ith your or we lose the ith tour. There is also a term of the "cost" - space for the prizes that need to be taken into account. Thus dp[n][l][k] = p(winning n)*dp[n-1][l-1][k+a[n]] + p(losing n)*dp[n-1][l][k]. Thus space complexity is n*l*(2*n)= 2n^2l. and time complexity is O(n^2*l). 
+
+Q12 : Decoding genome
+
+Difficulty : Easy
+
+This problem is one of the most standard dp problems. Cakewalk . The only precaution is that since the computations are 2^10^8, it is advised to use the bottom up dp instead of the top down dp because of the low overhead. Plus these type of counting problems are easily modelled in terms of bottom up dp's. time complexity is O(nm^2), and time complexity is O(nm). n = 10^5. 
+
+Q13 : Decoding genome (hard)
+
+Difficulty : Medium 
+
+This problem is the harder variant of the original problem where the limit of n is 10^15. Look whenevr you have to count the number of ways of a series of placement of tokens where there is some boundation on the placement of the neighbouring tokens, then we can count them in the form of matrix multiplication. Write a matrix recurrence and proceed. In this way counting can be done for absurdly large length of the sequence, however the transition rule from one state to anoter should be small.
+Matrix exponentiation dp. Each matrix basically represents a restriction or an ordering among the neighbouring tokens, this matrix is overloaded in matrix exponentiation. Time complexity is O(logn*m^3). Remmber this concept. It is the only dp way in which a dimension in log comes and thus is able t compute the answer of extremely large values in one variable. 
+
+Q14 : Lion Age II
+
+Difficulty : Medium 
+
+The dp is straightforward on the number of the alphabets processed, the number of the alphabets changed and the last alphabet in the sequence. from each state the transitions are of the order of the number of alphabets, O(27*|s|*k*27) and space complexity of O(27*|s|*k). This is simliar to the 0-1 knapsack paradigm and oter questions like checkout assistant and decoding genome easy fall in this category. 
+
+Q15 : Table 
+
+Difficulty : Easy
+
+We have to find the number of ways of placing k numbers in n buckets. For each such way we have to multiply it with n choose r to the power m/n. This is a pretty simple 2 dimensional dp. O(n*k*n*logm). With a little bit of precomputation, the time can be reduced to O(n^4) = 10^8 which should pass on the 4s time limit. 
+
+Q16: Towers
+
+Difficulty : Hard 
+
+Upon looking at the proble m and the examples, it looked like the problem is based on the greedy stategy, however WA prevailed. Then when i looked for the dp solution, i could get this -> we want to start a new merged interval from the index i, and we know the index j to i-1 mergde in the previous go, then dp[i][k] = min(dp[k+1][i]) for all k > i st the sum from i to k is greater than that from j to i-1. This accounted for an O(n^3) solution, and i could not go forward with it. However the beauty is captured by the fact, that the same recursion can be reduced  to an O(n^2) dp just by converting it to a bottom up dp, Go in a backward fashion in i and and j. (Think about the O(n) redundancy in the top down approach). One can also code the top down O(n^2) approach to this question also. 
+
+Q18: Fragile bridges
+
+Difficulty : Medium Hard
+
+Undserstand the model of the question and notice that cases are made based on wheteher each bridge has even/odd strength. Now the dp state is formulated as -> dp[The index till which the states are considered][The index is the last in the tour or not] = max score between the platforms till the index and the tour satisfying the condition in the second bracket. Recuurence is 
+if(bridge i-1 -> i is even) dp[i][1] = dp[i-1][1] + x-1, dp[i][0] = max(dp[i-1][1], dp[i-1][0])+x. else 
+dp[i][1] = dp[i-1][1] + x, dp[i][0] = max(dp[i-1][0], dp[i-1][1]) + x-1.
+Time complexity is O(n). 
+

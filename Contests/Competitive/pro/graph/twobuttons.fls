@@ -1,0 +1,6 @@
+PWD /Users/sarthakgarg/work/Competitive/pro/graph
+INPUT /usr/local/texlive/2014/texmf.cnf
+INPUT /usr/local/texlive/2014/texmf-dist/web2c/texmf.cnf
+INPUT /usr/local/texlive/2014/texmf-var/web2c/pdftex/pdflatex.fmt
+INPUT /Users/sarthakgarg/work/Competitive/pro/graph/twobuttons.cpp
+OUTPUT /Users/sarthakgarg/work/Competitive/pro/graph/twobuttons.log
